@@ -1,0 +1,536 @@
+openapi: 3.0.3
+info:
+  title: VogueAG Products APIs Definition
+  description: "# About Us\n**VogueAG** is a luxury ecommerce product selling company. Any website can list your products by using our _APIs_. \n# Categories suported\n  - Bags\n    - wallets\n    - slingbags\n    - totebags\n  - Shoes\n  - Acessories\n  - Clothing\n"
+  termsOfService: https://vogueag.com/terms/
+  contact:
+    name: API Support
+    url: https://www.vogueag.com/support
+    email: support@vogueag.com
+  license:
+    name: Vouge License
+    url: https://www.vougeag.com/licenses/LICENSE-2.0.html
+  version: 3.0.3
+  x-custom-info:
+    comment: Some comments
+    developers:
+    - name: John Doe
+      email: john@doe.com
+externalDocs:
+  description: External Documentation
+  url: https://example.com
+servers:
+- url: https://development.vougeag-server.com/v1
+  description: Development server
+security:
+- BasicAuth: []
+- BearerAuth: []
+- ApiKeyAuth: []
+- oAuth2AuthCode:
+  - read
+  - write
+  - admin
+tags:
+- name: Categories
+  description: Categories-related operations
+- name: Products
+  description: Products-related operations
+- name: Orders
+  description: Orders-related operations
+paths:
+  /categories:
+    get:
+      tags:
+      - Categories
+      summary: List all catgories
+      description: Returns the list of categories supported by Vouge
+      operationId: getCategories
+      parameters:
+      - name: categoryId
+        in: query
+        required: false
+        schema:
+          maximum: 1000
+          minimum: 100
+          type: integer
+        examples:
+          bags:
+            summary: Use this example for bags
+            value: 101
+          shoes:
+            value: 102
+          accessories:
+            value: 103
+          clothing:
+            value: 104
+      responses:
+        "200":
+          description: A list of catgories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+              examples:
+                all-categories-data:
+                  summary: Categories example data
+                  value:
+                  - categoryId: 101
+                    name: Bags
+                  - categoryId: 102
+                    name: Shoes
+                  - categoryId: 103
+                    name: Accessories
+                  - categoryId: 104
+                    name: Clothing
+                single-category-data:
+                  summary: Single category example data
+                  value:
+                  - categoryId: 101
+                    name: Bags
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - BasicAuth: []
+  /categories/{categoryId}:
+    get:
+      tags:
+      - Categories
+      summary: Return category details
+      description: Returns the category details from Vogue
+      operationId: getCategoryDetails
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          maximum: 1000
+          minimum: 100
+          type: integer
+        example: 102
+      responses:
+        "200":
+          description: Return category details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+      security: []
+  /products:
+    get:
+      tags:
+      - Products
+      summary: List all products
+      description: |
+        Returns the list of products supported by Vogue
+      operationId: getProducts
+      parameters:
+      - name: categoryId
+        in: query
+        required: false
+        schema:
+          maximum: 1000
+          minimum: 100
+          type: integer
+        example: 101
+      responses:
+        "200":
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+              examples:
+                products-data:
+                  summary: Products example data
+                  value:
+                  - productId: 101
+                    name: MCM
+                    price: 999.99
+                    categoryName: Bags
+                    quantity: 96
+                  - productId: 102
+                    name: Prada
+                    price: 899.99
+                    categoryName: Bags
+                    quantity: 121
+                  - productId: 103
+                    name: Gucci
+                    price: 750.99
+                    categoryName: Bags
+                    quantity: 67
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /products/{productId}:
+    get:
+      tags:
+      - Products
+      summary: Return product details
+      description: |
+        Returns the product details from Vogue
+      operationId: getProductDetails
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          maximum: 1000
+          minimum: 100
+          type: integer
+        example: 101
+      responses:
+        "200":
+          description: Return product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /orders:
+    get:
+      tags:
+      - Orders
+      summary: Get Order Details
+      description: Get order details from Vogue
+      operationId: getOrderDetails
+      parameters:
+      - name: orderId
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Fetch Order details successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+      - Orders
+      summary: Update Order
+      description: |
+        Update order details to Vogue for processing
+        and shipping
+      operationId: updateOrderDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orders_body'
+      responses:
+        "200":
+          description: Order details updated successfully
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+      - Orders
+      summary: Create Order
+      description: |
+        Post order details to Vogue for processing
+        and shipping
+      operationId: saveOrderDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orders_body_1'
+      responses:
+        "201":
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+          links:
+            GetOrderByOrderId:
+              $ref: '#/components/links/GetOrderByOrderId'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+      - Orders
+      summary: Delete Order
+      description: Delete order details from Vogue
+      operationId: deleteOrderDetails
+      parameters:
+      - name: orderId
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Order details cancelled successfully
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /orders/{orderId}:
+    get:
+      tags:
+      - Orders
+      summary: Get Order Details
+      description: Get order details from Vogue
+      operationId: getOrderDetailsUsingPathParam
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Fetch Order details successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orders_body'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+      deprecated: true
+  /oneOfOrder:
+    post:
+      tags:
+      - Orders
+      summary: Insert OneOf the Order Details
+      description: Insert OneOf the Order Details into Vogue
+      operationId: demoOfOneOf
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/oneOfOrder_body'
+      responses:
+        "200":
+          description: Order placed successfully
+  /anyOfOrder:
+    get:
+      tags:
+      - Orders
+      summary: Get Order Details
+      description: Get Order Details based on Order ID
+      operationId: demoOfAnyOf
+      parameters:
+      - name: orderId
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: fetchType
+        in: query
+        description: |
+          Fetch Type:
+           * `summary` - Will provide Order Summary
+           * `details` - Will provide Order Summary & Order Address
+        required: true
+        schema:
+          type: string
+          enum:
+          - summary
+          - details
+      responses:
+        "200":
+          description: Return product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+components:
+  schemas:
+    Address:
+      required:
+      - addressLine
+      - city
+      - state
+      - zipcode
+      type: object
+      properties:
+        addressLine:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          enum:
+          - Germany
+          - Italy
+          - France
+          - UnitedKingdom
+        zipcode:
+          type: string
+        isOfficeAddress:
+          type: boolean
+    Product:
+      type: object
+      properties:
+        productId:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+          format: float
+        categoryName:
+          type: string
+          nullable: true
+        releaseDate:
+          type: string
+          format: date
+          readOnly: true
+        quantity:
+          type: integer
+          description: |
+            ***Quantity*** represents `stock` value when this field is being sent by Vogue.Where as in the scenarios of consumer sending this feild, it represents `number of product items` inside the order. Consumers are expected to handle the scenario of stopping the end user <u>*when the stock value is 0*</u>
+    Category:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+        name:
+          type: string
+    Bags:
+      allOf:
+      - $ref: '#/components/schemas/Product'
+      - required:
+        - networkType
+        type: object
+        properties:
+          networkType:
+            type: string
+            enum:
+            - 4G
+            - 5G
+    Shoes:
+      allOf:
+      - $ref: '#/components/schemas/Product'
+      - required:
+        - ram
+        type: object
+        properties:
+          ram:
+            type: string
+            enum:
+            - 8 GB
+            - 16 GB
+            - 32 GB
+    OrderSummary:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    OrderAddress:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+    inline_response_200:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        address:
+          $ref: '#/components/schemas/Address'
+    orders_body:
+      type: object
+      properties:
+        orderId:
+          type: integer
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        address:
+          $ref: '#/components/schemas/Address'
+    orders_body_1:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        address:
+          $ref: '#/components/schemas/Address'
+    inline_response_201:
+      type: object
+      properties:
+        orderId:
+          type: integer
+    oneOfOrder_body:
+      required:
+      - address
+      - products
+      type: object
+      properties:
+        products:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/Bags'
+          - $ref: '#/components/schemas/Shoes'
+        address:
+          $ref: '#/components/schemas/Address'
+    inline_response_200_1:
+      anyOf:
+      - $ref: '#/components/schemas/OrderSummary'
+      - $ref: '#/components/schemas/OrderAddress'
+  responses:
+    InternalServerError:
+      description: |
+        An error occured while processing the request.
+        Please contact support@vogue.com
+  parameters:
+    orderIdQueryParam:
+      name: orderId
+      in: query
+      required: true
+      schema:
+        type: integer
+    orderIdPathParam:
+      name: orderId
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-KEY
+      in: header
+    oAuth2AuthCode:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/api/oauth.access
+          scopes:
+            read: Read only access
+            write: Read Write access
+            admin: Admin access
+  links:
+    GetOrderByOrderId:
+      operationId: getProductDetails
+      parameters:
+        orderId: $response.body#/orderId
+      description: |
+        The `orderId` value returned in the response can be used as input parameter in `GET /orders`.

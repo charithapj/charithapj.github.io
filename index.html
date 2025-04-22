@@ -1,0 +1,974 @@
+<!doctype html>
+<html>
+  <head>
+    <title>VogueAG Products APIs Definition</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>VogueAG Products APIs Definition</h1>
+    <div class="app-desc"><h1>About Us</h1>
+<p><strong>VogueAG</strong> is a luxury ecommerce product selling company. Any website can list your products by using our <em>APIs</em>.</p>
+<h1>Categories suported</h1>
+<ul>
+<li>Bags
+<ul>
+<li>wallets</li>
+<li>slingbags</li>
+<li>totebags</li>
+</ul>
+</li>
+<li>Shoes</li>
+<li>Acessories</li>
+<li>Clothing</li>
+</ul>
+</div>
+    <div class="app-desc">More information: <a href="https://www.vogueag.com/support">https://www.vogueag.com/support</a></div>
+    <div class="app-desc">Contact Info: <a href="support@vogueag.com">support@vogueag.com</a></div>
+    <div class="app-desc">Version: 3.0.3</div>
+    <div class="app-desc">BasePath:/v1</div>
+    <div class="license-info">Vouge License</div>
+    <div class="license-url">https://www.vougeag.com/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:X-API-KEY KeyInQuery:false KeyInHeader:true</li>
+      <li>HTTP Basic Authentication</li>
+      <li></li>
+      <li>OAuth AuthorizationUrl:https://example.com/oauth/authorizeTokenUrl:https://example.com/api/oauth.access</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Categories">Categories</a></h4>
+  <ul>
+  <li><a href="#getCategories"><code><span class="http-method">get</span> /categories</code></a></li>
+  <li><a href="#getCategoryDetails"><code><span class="http-method">get</span> /categories/{categoryId}</code></a></li>
+  </ul>
+  <h4><a href="#Orders">Orders</a></h4>
+  <ul>
+  <li><a href="#deleteOrderDetails"><code><span class="http-method">delete</span> /orders</code></a></li>
+  <li><a href="#demoOfAnyOf"><code><span class="http-method">get</span> /anyOfOrder</code></a></li>
+  <li><a href="#demoOfOneOf"><code><span class="http-method">post</span> /oneOfOrder</code></a></li>
+  <li><a href="#getOrderDetails"><code><span class="http-method">get</span> /orders</code></a></li>
+  <li><a href="#getOrderDetailsUsingPathParam"><code><span class="http-method">get</span> /orders/{orderId}</code></a></li>
+  <li><a href="#saveOrderDetails"><code><span class="http-method">post</span> /orders</code></a></li>
+  <li><a href="#updateOrderDetails"><code><span class="http-method">put</span> /orders</code></a></li>
+  </ul>
+  <h4><a href="#Products">Products</a></h4>
+  <ul>
+  <li><a href="#getProductDetails"><code><span class="http-method">get</span> /products/{productId}</code></a></li>
+  <li><a href="#getProducts"><code><span class="http-method">get</span> /products</code></a></li>
+  </ul>
+
+  <h1><a name="Categories">Categories</a></h1>
+  <div class="method"><a name="getCategories"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /categories</code></pre></div>
+    <div class="method-summary">List all catgories (<span class="nickname">getCategories</span>)</div>
+    <div class="method-notes">Returns the list of categories supported by Vouge</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">categoryId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Category">Category</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "name" : "name",
+  "categoryId" : 0
+}, {
+  "name" : "name",
+  "categoryId" : 0
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A list of catgories
+        
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: all-categories-data</div>
+    <pre class="example"><code>[{&quot;categoryId&quot;:101,&quot;name&quot;:&quot;Bags&quot;},{&quot;categoryId&quot;:102,&quot;name&quot;:&quot;Shoes&quot;},{&quot;categoryId&quot;:103,&quot;name&quot;:&quot;Accessories&quot;},{&quot;categoryId&quot;:104,&quot;name&quot;:&quot;Clothing&quot;}]</code></pre>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: single-category-data</div>
+    <pre class="example"><code>[{&quot;categoryId&quot;:101,&quot;name&quot;:&quot;Bags&quot;}]</code></pre>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getCategoryDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /categories/{categoryId}</code></pre></div>
+    <div class="method-summary">Return category details (<span class="nickname">getCategoryDetails</span>)</div>
+    <div class="method-notes">Returns the category details from Vogue</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">categoryId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Category">Category</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "name" : "name",
+  "categoryId" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return category details
+        <a href="#Category">Category</a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Orders">Orders</a></h1>
+  <div class="method"><a name="deleteOrderDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /orders</code></pre></div>
+    <div class="method-summary">Delete Order (<span class="nickname">deleteOrderDetails</span>)</div>
+    <div class="method-notes">Delete order details from Vogue</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">orderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">204</h4>
+    Order details cancelled successfully
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="demoOfAnyOf"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /anyOfOrder</code></pre></div>
+    <div class="method-summary">Get Order Details (<span class="nickname">demoOfAnyOf</span>)</div>
+    <div class="method-notes">Get Order Details based on Order ID</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">orderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">fetchType (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; &lt;p&gt;Fetch Type:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;summary&lt;/code&gt; - Will provide Order Summary&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;details&lt;/code&gt; - Will provide Order Summary &amp;amp; Order Address&lt;/li&gt;
+&lt;/ul&gt;
+ </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_1">inline_response_200_1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return product details
+        <a href="#inline_response_200_1">inline_response_200_1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="demoOfOneOf"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /oneOfOrder</code></pre></div>
+    <div class="method-summary">Insert OneOf the Order Details (<span class="nickname">demoOfOneOf</span>)</div>
+    <div class="method-notes">Insert OneOf the Order Details into Vogue</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#oneOfOrder_body">oneOfOrder_body</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Order placed successfully
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getOrderDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /orders</code></pre></div>
+    <div class="method-summary">Get Order Details (<span class="nickname">getOrderDetails</span>)</div>
+    <div class="method-notes">Get order details from Vogue</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">orderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "address" : {
+    "zipcode" : "zipcode",
+    "city" : "city",
+    "state" : "Germany",
+    "addressLine" : "addressLine",
+    "isOfficeAddress" : true
+  },
+  "orderId" : 0,
+  "products" : [ {
+    "quantity" : 1,
+    "productId" : 0,
+    "releaseDate" : "2000-01-23",
+    "price" : 6.0274563,
+    "name" : "name",
+    "categoryName" : "categoryName"
+  }, {
+    "quantity" : 1,
+    "productId" : 0,
+    "releaseDate" : "2000-01-23",
+    "price" : 6.0274563,
+    "name" : "name",
+    "categoryName" : "categoryName"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Fetch Order details successfully
+        <a href="#inline_response_200">inline_response_200</a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getOrderDetailsUsingPathParam"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /orders/{orderId}</code></pre></div>
+    <div class="method-summary">Get Order Details (<span class="nickname">getOrderDetailsUsingPathParam</span>)</div>
+    <div class="method-notes">Get order details from Vogue</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">orderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#orders_body">orders_body</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "address" : {
+    "zipcode" : "zipcode",
+    "city" : "city",
+    "state" : "Germany",
+    "addressLine" : "addressLine",
+    "isOfficeAddress" : true
+  },
+  "orderId" : 0,
+  "products" : [ {
+    "quantity" : 1,
+    "productId" : 0,
+    "releaseDate" : "2000-01-23",
+    "price" : 6.0274563,
+    "name" : "name",
+    "categoryName" : "categoryName"
+  }, {
+    "quantity" : 1,
+    "productId" : 0,
+    "releaseDate" : "2000-01-23",
+    "price" : 6.0274563,
+    "name" : "name",
+    "categoryName" : "categoryName"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Fetch Order details successfully
+        <a href="#orders_body">orders_body</a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="saveOrderDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /orders</code></pre></div>
+    <div class="method-summary">Create Order (<span class="nickname">saveOrderDetails</span>)</div>
+    <div class="method-notes">Post order details to Vogue for processing
+and shipping</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#orders_body_1">orders_body_1</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_201">inline_response_201</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "orderId" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Order created successfully
+        <a href="#inline_response_201">inline_response_201</a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateOrderDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /orders</code></pre></div>
+    <div class="method-summary">Update Order (<span class="nickname">updateOrderDetails</span>)</div>
+    <div class="method-notes">Update order details to Vogue for processing
+and shipping</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#orders_body">orders_body</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Order details updated successfully
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Products">Products</a></h1>
+  <div class="method"><a name="getProductDetails"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /products/{productId}</code></pre></div>
+    <div class="method-summary">Return product details (<span class="nickname">getProductDetails</span>)</div>
+    <div class="method-notes">Returns the product details from Vogue</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">productId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Product">Product</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "quantity" : 1,
+  "productId" : 0,
+  "releaseDate" : "2000-01-23",
+  "price" : 6.0274563,
+  "name" : "name",
+  "categoryName" : "categoryName"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return product details
+        <a href="#Product">Product</a>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getProducts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /products</code></pre></div>
+    <div class="method-summary">List all products (<span class="nickname">getProducts</span>)</div>
+    <div class="method-notes">Returns the list of products supported by Vogue</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">categoryId (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Product">Product</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "quantity" : 1,
+  "productId" : 0,
+  "releaseDate" : "2000-01-23",
+  "price" : 6.0274563,
+  "name" : "name",
+  "categoryName" : "categoryName"
+}, {
+  "quantity" : 1,
+  "productId" : 0,
+  "releaseDate" : "2000-01-23",
+  "price" : 6.0274563,
+  "name" : "name",
+  "categoryName" : "categoryName"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A list of products
+        
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: products-data</div>
+    <pre class="example"><code>[{&quot;productId&quot;:101,&quot;name&quot;:&quot;MCM&quot;,&quot;price&quot;:999.99,&quot;categoryName&quot;:&quot;Bags&quot;,&quot;quantity&quot;:96},{&quot;productId&quot;:102,&quot;name&quot;:&quot;Prada&quot;,&quot;price&quot;:899.99,&quot;categoryName&quot;:&quot;Bags&quot;,&quot;quantity&quot;:121},{&quot;productId&quot;:103,&quot;name&quot;:&quot;Gucci&quot;,&quot;price&quot;:750.99,&quot;categoryName&quot;:&quot;Bags&quot;,&quot;quantity&quot;:67}]</code></pre>
+    <h4 class="field-label">500</h4>
+    An error occured while processing the request.
+Please contact support@vogue.com
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Address"><code>Address</code></a></li>
+    <li><a href="#Bags"><code>Bags</code></a></li>
+    <li><a href="#Category"><code>Category</code></a></li>
+    <li><a href="#OrderAddress"><code>OrderAddress</code></a></li>
+    <li><a href="#OrderSummary"><code>OrderSummary</code></a></li>
+    <li><a href="#Product"><code>Product</code></a></li>
+    <li><a href="#Shoes"><code>Shoes</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+    <li><a href="#inline_response_200_1"><code>inline_response_200_1</code></a></li>
+    <li><a href="#inline_response_201"><code>inline_response_201</code></a></li>
+    <li><a href="#oneOfOrder_body"><code>oneOfOrder_body</code></a></li>
+    <li><a href="#orders_body"><code>orders_body</code></a></li>
+    <li><a href="#orders_body_1"><code>orders_body_1</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Address"><code>Address</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">addressLine </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">city </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">state </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Germany</div><div class="param-enum">Italy</div><div class="param-enum">France</div><div class="param-enum">UnitedKingdom</div>
+<div class="param">zipcode </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">isOfficeAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Bags"><code>Bags</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">networkType </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">4G</div><div class="param-enum">5G</div>
+<div class="param">productId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">price (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  format: float</div>
+<div class="param">categoryName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">releaseDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">quantity (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> &lt;em&gt;&lt;strong&gt;Quantity&lt;/strong&gt;&lt;/em&gt; represents &lt;code&gt;stock&lt;/code&gt; value when this field is being sent by Vogue.Where as in the scenarios of consumer sending this feild, it represents &lt;code&gt;number of product items&lt;/code&gt; inside the order. Consumers are expected to handle the scenario of stopping the end user &lt;u&gt;&lt;em&gt;when the stock value is 0&lt;/em&gt;&lt;/u&gt; </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Category"><code>Category</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">categoryId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrderAddress"><code>OrderAddress</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrderSummary"><code>OrderSummary</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">products (optional)</div><div class="param-desc"><span class="param-type"><a href="#Product">array[Product]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Product"><code>Product</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">productId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">price (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  format: float</div>
+<div class="param">categoryName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">releaseDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">quantity (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> &lt;em&gt;&lt;strong&gt;Quantity&lt;/strong&gt;&lt;/em&gt; represents &lt;code&gt;stock&lt;/code&gt; value when this field is being sent by Vogue.Where as in the scenarios of consumer sending this feild, it represents &lt;code&gt;number of product items&lt;/code&gt; inside the order. Consumers are expected to handle the scenario of stopping the end user &lt;u&gt;&lt;em&gt;when the stock value is 0&lt;/em&gt;&lt;/u&gt; </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Shoes"><code>Shoes</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">ram </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">8 GB</div><div class="param-enum">16 GB</div><div class="param-enum">32 GB</div>
+<div class="param">productId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">price (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  format: float</div>
+<div class="param">categoryName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">releaseDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">quantity (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> &lt;em&gt;&lt;strong&gt;Quantity&lt;/strong&gt;&lt;/em&gt; represents &lt;code&gt;stock&lt;/code&gt; value when this field is being sent by Vogue.Where as in the scenarios of consumer sending this feild, it represents &lt;code&gt;number of product items&lt;/code&gt; inside the order. Consumers are expected to handle the scenario of stopping the end user &lt;u&gt;&lt;em&gt;when the stock value is 0&lt;/em&gt;&lt;/u&gt; </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">orderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">products (optional)</div><div class="param-desc"><span class="param-type"><a href="#Product">array[Product]</a></span>  </div>
+<div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_1"><code>inline_response_200_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_201"><code>inline_response_201</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">orderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="oneOfOrder_body"><code>oneOfOrder_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">products </div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span>  </div>
+      <div class="param-desc"><span class="param-type">oneOf:</span>
+              <a href="#Bags"><code>Bags</code></a>&nbsp;&nbsp;&nbsp;
+              <a href="#Shoes"><code>Shoes</code></a>&nbsp;&nbsp;&nbsp;
+      </div>
+<div class="param">address </div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="orders_body"><code>orders_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">orderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">products (optional)</div><div class="param-desc"><span class="param-type"><a href="#Product">array[Product]</a></span>  </div>
+<div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="orders_body_1"><code>orders_body_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">products (optional)</div><div class="param-desc"><span class="param-type"><a href="#Product">array[Product]</a></span>  </div>
+<div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
